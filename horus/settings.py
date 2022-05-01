@@ -54,7 +54,7 @@ ROOT_URLCONF = 'horus.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['horus/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
