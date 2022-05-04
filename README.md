@@ -15,3 +15,8 @@ cd horus/
 python manage.py runserver
 ```
 
+## Database design
+
+![horus ERD](res/er.svg)
+
+The database diagram was generated using [GraphViz](https://graphviz.org/)!
