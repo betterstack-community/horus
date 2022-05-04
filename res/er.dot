@@ -40,6 +40,6 @@ digraph {
 
 
   User -> Favorite [arrowhead=tee, arrowtail=crow, dir=both];
-  User -> Location [arrowhead=tee, arrowtail=tee, dir=both];
-  Location -> Favorite [arrowhead=tee, arrowtail=tee, dir=both];
+  Location -> User [arrowhead=tee, arrowtail=crow, dir=both];
+  Location -> Favorite [arrowhead=tee, arrowtail=crow, dir=both];
 }
