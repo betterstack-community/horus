@@ -30,7 +30,7 @@ digraph {
     <tr><td bgcolor="lightblue" colspan="3">Location</td></tr>
     <tr><td align="right">PK</td><td align="left" width="150px">id</td><td align="left" width="50px">serial</td></tr>
     <tr><td align="right"></td><td align="left" width="150px">city</td><td align="left" width="50px">text</td></tr>
-    <tr><td align="right"></td><td align="left" width="150px">country_code</td><td align="left" width="50px">ncahr(3)</td></tr>
+    <tr><td align="right"></td><td align="left" width="150px">country_code</td><td align="left" width="50px">nchar(3)</td></tr>
     <tr><td align="right"></td><td align="left" width="150px">longitude</td><td align="left" width="50px">decimal(18, 15)</td></tr>
     <tr><td align="right"></td><td align="left" width="150px">latitude</td><td align="left" width="50px">decimal(17, 15)</td></tr>
   </table>

@@ -112,7 +112,7 @@
 <polygon fill="none" stroke="black" points="190,-42 190,-63 340,-63 340,-42 190,-42"/>
 <text text-anchor="start" x="193" y="-48.8" font-family="Times,serif" font-size="14.00">country_code</text>
 <polygon fill="none" stroke="black" points="340,-42 340,-63 458,-63 458,-42 340,-42"/>
-<text text-anchor="start" x="343" y="-48.8" font-family="Times,serif" font-size="14.00">ncahr(3)</text>
+<text text-anchor="start" x="343" y="-48.8" font-family="Times,serif" font-size="14.00">nchar(3)</text>
 <polygon fill="none" stroke="black" points="163,-21 163,-42 190,-42 190,-21 163,-21"/>
 <polygon fill="none" stroke="black" points="190,-21 190,-42 340,-42 340,-21 190,-21"/>
 <text text-anchor="start" x="193" y="-27.8" font-family="Times,serif" font-size="14.00">longitude</text>
