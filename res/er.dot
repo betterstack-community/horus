@@ -1,0 +1,45 @@
+digraph {
+  graph [pad="0.2", nodesep="1.5", splines=ortho]
+  node [shape=plain]
+
+  User [label=<
+  <table border="0" cellborder="1" cellspacing="0">
+    <tr><td bgcolor="lightblue" colspan="3">User</td></tr>
+    <tr><td align="right">PK</td><td align="left" width="150px">id</td><td align="left" width="50px">serial</td></tr>
+    <tr><td align="right">UN</td><td align="left" width="150px">email</td><td align="left" width="50px">text</td></tr>
+    <tr><td align="right"></td><td align="left" width="150px">username</td><td align="left" width="50px">nchar(150)</td></tr>
+    <tr><td align="right"></td><td align="left" width="150px">first_name</td><td align="left" width="50px">nchar(150)</td></tr>
+    <tr><td align="right"></td><td align="left" width="150px">last_name</td><td align="left" width="50px">nchar(150)</td></tr>
+    <tr><td align="right"></td><td align="left" width="150px">lat</td><td align="left" width="50px">type</td></tr>
+    <tr><td align="right">FK</td><td align="left" width="150px">location_id</td><td align="left" width="50px">serial</td></tr>
+  </table>
+  >]
+
+  Favorite [label=<
+  <table border="0" cellborder="1" cellspacing="0">
+    <tr><td bgcolor="lightblue" colspan="3">Favorite</td></tr>
+    <tr><td align="right">PK</td><td align="left" width="150px">id</td><td align="left" width="50px">serial</td></tr>
+    <tr><td align="right"></td><td align="left" width="150px">row</td><td align="left" width="50px">type</td></tr>
+    <tr><td align="right">FK</td><td align="left" width="150px">user_id</td><td align="left" width="50px">serial</td></tr>
+    <tr><td align="right">FK</td><td align="left" width="150px">location_id</td><td align="left" width="50px">serial</td></tr>
+  </table>
+  >]
+
+  Location [label=<
+  <table border="0" cellborder="1" cellspacing="0">
+    <tr><td bgcolor="lightblue" colspan="3">Location</td></tr>
+    <tr><td align="right">PK</td><td align="left" width="150px">id</td><td align="left" width="50px">serial</td></tr>
+    <tr><td align="right"></td><td align="left" width="150px">city</td><td align="left" width="50px">text</td></tr>
+    <tr><td align="right"></td><td align="left" width="150px">country_code</td><td align="left" width="50px">ncahr(3)</td></tr>
+    <tr><td align="right"></td><td align="left" width="150px">longitude</td><td align="left" width="50px">decimal(18, 15)</td></tr>
+    <tr><td align="right"></td><td align="left" width="150px">latitude</td><td align="left" width="50px">decimal(17, 15)</td></tr>
+  </table>
+  >]
+
+  {rank = same; User; Favorite;}
+
+
+  User -> Favorite [arrowhead=tee, arrowtail=crow, dir=both];
+  User -> Location [arrowhead=tee, arrowtail=tee, dir=both];
+  Location -> Favorite [arrowhead=tee, arrowtail=tee, dir=both];
+}
