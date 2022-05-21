@@ -11,8 +11,10 @@
 <body>
   <h1>Welcome to Horus!</h1>
   <p>Check out the weather below!</p>
+  <p>{{ d }}</p>
 
-  <form action="/weather/" method="post">
+  <form action="/search/" method="post">
+    {% csrf_token %}
     <label for="location">Location: </label>
     <input type="text" name="location" id="location">
     <input type="submit" value="Search">
