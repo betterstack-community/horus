@@ -10,12 +10,30 @@
 
 <body>
   <h1>Horus</h1>
+  {% if success %}
   <p>You tried searching for {{ search }}, did you mean...</p>
+  <form action="/weather/" method="post">
+    {% csrf_token %}
+    {% for result in results %}
+    <input type="radio" name="location" id={{ forloop.counter }} value="{{ result.lat }}, {{ result.lon }}" required>
+    <label for={{ forloop.counter }}>{{ result.name }}, {{ result.country }}{% if result.state != '' %},
+      {{result.state}} {% endif %}</label>
+    <br>
+    {% endfor %}
+    <input type="submit" value="Show me the weather!">
+  </form>
   <ul>
     {% for result in results %}
-      <li>{{ result }}</li>
+    <li>{{ result }}</li>
     {% endfor %}
   </ul>
+  {% else %}
+  <p>We did not catch that, please enter your desired location again...</p>
+  <form action="/" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Back to Search">
+  </form>
+  {% endif %}
 </body>
 
 </html>
