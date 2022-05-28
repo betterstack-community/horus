@@ -85,7 +85,7 @@ def weather(request):
         return render(request, 'weather.html', {'success': False, 'weather': f'Invalid location selected...'})
 
     weather = {
-        'current': api_response.json()['weather'][0]['description'].capitalize(),
+        'current': api_response.json()['weather'][0]['description'].lower(),
         'temp': api_response.json()['main']['temp'],
         'feels_like': api_response.json()['main']['feels_like'],
         'location': input[0]
