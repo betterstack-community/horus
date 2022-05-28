@@ -32,6 +32,15 @@ body {
   cursor: pointer;
 }
 
+.container form .ends {
+  width: 100%;
+  display: flex;
+}
+
+.container form .ends .spacer {
+  flex: 1;
+}
+
 a {
   text-decoration: none;
   color: inherit;
