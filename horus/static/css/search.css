@@ -1,0 +1,12 @@
+.container form .ends {
+  width: 100%;
+  display: flex;
+}
+
+.container form .ends .spacer {
+  flex: 1;
+}
+
+.container form input[type="submit"] {
+  margin-top: 0.8rem;
+}

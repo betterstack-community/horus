@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,30 +6,41 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/global.css' %}">
+  <link rel="stylesheet" href="{% static 'css/search.css' %}">
   <title>Horus - Search</title>
 </head>
 
 <body>
-  <h1>Horus</h1>
-  {% if success %}
-  <p>You tried searching for {{ search }}, did you mean...</p>
-  <form action="/weather/" method="post">
-    {% csrf_token %}
-    {% for result in results %}
-    <input type="radio" name="location" id={{ forloop.counter }} value="{{ result.name }}, {{ result.lat }}, {{ result.lon }}" required>
-    <label for={{ forloop.counter }}>{{ result.name }}, {{ result.country }}{% if result.state != '' %},
-      {{result.state}} {% endif %}</label>
-    <br>
-    {% endfor %}
-    <input type="submit" value="Show me the weather!">
-  </form>
-  {% else %}
-  <p>We did not catch that, please enter your desired location again...</p>
-  <form action="/" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Back to Search">
-  </form>
-  {% endif %}
+  <div class="container">
+    <h1><a href="/">Horus</a></h1>
+    {% if success %}
+    <p class="subtitle">You tried searching for <strong>{{ search }}</strong>, did you mean...</p>
+    <form action="/weather/" method="post">
+      {% csrf_token %}
+      {% for result in results %}
+      <input type="radio" name="location" id={{ forloop.counter }}
+        value="{{ result.name }}, {{ result.lat }}, {{ result.lon }}" required>
+      <label for={{ forloop.counter }}>{{ result.name }}, {{ result.country }}{% if result.state != '' %},
+        {{result.state}} {% endif %}</label>
+      <br>
+      {% endfor %}
+      <div class="ends">
+        <div class="spacer"></div>
+        <input type="submit" value="Show me the weather!">
+      </div>
+    </form>
+    {% else %}
+    <p>We did not catch that, please enter your desired location again...</p>
+    <form action="/" method="post">
+      {% csrf_token %}
+      <div class="ends">
+        <div class="spacer"></div>
+        <input type="submit" value="Back to search">
+      </div>
+    </form>
+    {% endif %}
+  </div>
 </body>
 
 </html>
