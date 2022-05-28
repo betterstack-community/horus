@@ -4,6 +4,7 @@ import requests
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
+import uuid
 
 env = environ.Env()
 env.read_env(env.str('ENV_PATH', '.env'))
@@ -11,6 +12,8 @@ openweather_api_key = env("OPEN_WEATHER_API_KEY")
 
 
 def index(request):
+    request.session['id'] = str(uuid.uuid4())
+    # TODO: Log when a new user session is created
     return render(request, 'index.html', {})
 
 
@@ -18,6 +21,7 @@ def search(request):
     """
     Page showing the results of the location search
     """
+    print(request.session['id'])
 
     if request.method != 'POST':
         return redirect('/')
