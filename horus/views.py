@@ -24,6 +24,7 @@ def search(request):
     print(request.session['id'])
 
     if request.method != 'POST':
+        # TODO: Log when invalid access it made
         return redirect('/')
 
     location = request.POST['location']
@@ -42,6 +43,7 @@ def search(request):
         })
 
     if not matching_locations.ok or len(matching_locations.json()) == 0:
+        # TODO: Log when the returned values are invalid
         return render(request, 'search.html', {'success': False, 'search': location, 'results': f'Unable to find {location}'})
 
     print(matching_locations.json())
