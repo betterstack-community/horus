@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horus - Weather Forecast</title>
+</head>
+
+<body>
+  <h1>Horus</h1>
+  {% if not success %}
+  <p>Unable to find the current weather of the searched location, try again</p>
+  {% else %}
+  <p>Current weather at <strong>{{ weather.location }}</strong></p>
+  <p>The current weather is <strong>{{ weather.current }}</strong></p>
+  <p>It is <strong>{{ weather.temp }} °C</strong> but it feels like <em>{{ weather.feels_like }} °C</em></p>
+  {% endif %}
+  <form action="/" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Search again!">
+  </form>
+</body>
+
+</html>

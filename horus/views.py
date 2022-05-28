@@ -47,7 +47,7 @@ def search(request):
         'lat': location['lat'],
         'lon': location['lon'],
         'country': pycountry.countries.get(alpha_2=location['country']).name,
-        'state': location['state'] if 'state' in location else ''
+        'state': location['state'] if 'state' in location else '',
     } for location in matching_locations.json()]
 
     # TODO: Demonstrate negative example of logging an API key by logging your OpenWeather API key
@@ -57,8 +57,37 @@ def search(request):
 
 def weather(request):
     """
-    Returns the weather of the searched location
+    Page showing the weather information from the selected location
     """
+    if request.method != 'POST':
+        return redirect('/')
+
+    # TODO: Log the POST body
     print(request.POST)
 
-    return render(request, 'weather.html', {})
+    # TODO: Log the latitude and longitude
+    input = request.POST['location'].split(', ')
+
+    # TODO: Log the API request made
+    weather_api_base = 'https://api.openweathermap.org/data/2.5/weather'
+    api_response = requests.get(
+        weather_api_base,
+        params={
+            'lat': float(input[1]),
+            'lon': float(input[2]),
+            'appid': openweather_api_key,
+            'units': 'metric'
+        })
+
+    print(api_response.json())
+
+    if not api_response.ok:
+        return render(request, 'weather.html', {'success': False, 'weather': f'Invalid location selected...'})
+
+    weather = {
+        'current': api_response.json()['weather'][0]['description'].capitalize(),
+        'temp': api_response.json()['main']['temp'],
+        'feels_like': api_response.json()['main']['feels_like'],
+        'location': input[0]
+    }
+    return render(request, 'weather.html', {'success': True, 'weather': weather})
