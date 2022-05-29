@@ -1,10 +1,11 @@
+import uuid
+
 import environ
 import pycountry
 import requests
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.template import loader
-import uuid
+
+# TODO: Enable logging with requests library
 
 env = environ.Env()
 env.read_env(env.str('ENV_PATH', '.env'))
@@ -23,15 +24,16 @@ def search(request):
     """
 
     if request.method != 'POST':
-        # TODO: Log when invalid access it made
+        # TODO: Log when invalid access is made
         return redirect('/')
+
+    # TODO: Log when user navigates to search page successfully
 
     location = request.POST['location']
 
     # TODO: Add logging for the location searched
 
     # TODO: Log the locations found from the API request
-    # TODO: Enable logging with requests library
     api = 'http://api.openweathermap.org/geo/1.0/direct'
     response = requests.get(
         api,
@@ -62,16 +64,18 @@ def weather(request):
     """
     Page showing the weather information from the selected location
     """
+
     if request.method != 'POST':
+        # TODO: Log when invalid access is made
         return redirect('/')
 
+    # TODO: Log when user navigates to weather page successfully
+
     # TODO: Log the POST body
-    print(request.POST)
 
     # TODO: Log the latitude and longitude
     input = request.POST['location'].split(', ')
 
-    # TODO: Log the API request made
     api = 'https://api.openweathermap.org/data/2.5/weather'
     response = requests.get(
         api,
@@ -82,7 +86,10 @@ def weather(request):
             'units': 'metric'
         })
 
+    # TODO: Log response from API
+
     if not response.ok:
+        # TODO: Log when request failed
         return render(request, 'weather.html', {'success': False, 'weather': f'Invalid location selected...'})
 
     weather = {
