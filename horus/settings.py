@@ -10,9 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
+
 import django_heroku
+import environ
+
+env = environ.Env()
+env.read_env(env.str('ENV_PATH', '.env'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,12 +30,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-r#71nl050c!mggft4@psbsjk+b9cbvrff-b(9#u@-4-r-r$v*$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = env.get_value('DEBUG', default=False)
 
 ALLOWED_HOSTS = [
-    'https://demo-horus.herokuapp.com',
-    'localhost',
-    '127.0.0.1'
 ]
 
 
@@ -134,4 +136,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-django_heroku.settings(locals())
+if env.get_value('DEBUG') == False:
+    django_heroku.settings(locals())
