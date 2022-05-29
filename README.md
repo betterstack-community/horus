@@ -10,7 +10,7 @@ This application aims to demonstrate the fundamentals of logging in Python withi
 
 - Search location by name
 - Get current location weather
-- Unique user session tracking
+- Unique user session tracking (demonstrated using Heroku)
 
 ## Setup
 
