@@ -14,6 +14,7 @@ openweather_api_key = env("OPEN_WEATHER_API_KEY")
 def index(request):
     request.session['id'] = str(uuid.uuid4())
     # TODO: Log when a new user session is created
+    print(f'New user just visited the website {request.session["id"]}')
     return render(request, 'index.html', {})
 
 
@@ -21,7 +22,7 @@ def search(request):
     """
     Page showing the results of the location search
     """
-    print(request.session['id'])
+    print(f'User {request.session["id"]} just searched')
 
     if request.method != 'POST':
         # TODO: Log when invalid access it made
@@ -45,8 +46,6 @@ def search(request):
     if not matching_locations.ok or len(matching_locations.json()) == 0:
         # TODO: Log when the returned values are invalid
         return render(request, 'search.html', {'success': False, 'search': location, 'results': f'Unable to find {location}'})
-
-    print(matching_locations.json())
 
     location_data = [{
         'name': location['name'],
