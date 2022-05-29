@@ -1,4 +1,13 @@
-Django
-django-environ
-requests
-pycountry
+asgiref==3.5.2
+autopep8==1.6.0
+certifi==2022.5.18.1
+charset-normalizer==2.0.12
+Django==4.0.4
+django-environ==0.8.1
+idna==3.3
+pycodestyle==2.8.0
+pycountry==22.3.5
+requests==2.27.1
+sqlparse==0.4.2
+toml==0.10.2
+urllib3==1.26.9
