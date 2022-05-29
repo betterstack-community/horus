@@ -16,7 +16,9 @@ from pathlib import Path
 import django_heroku
 import environ
 
-env = environ.Env()
+env = environ.Env(
+    DEBUG=(bool, False)
+)
 env.read_env(env.str('ENV_PATH', '.env'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,7 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-r#71nl050c!mggft4@psbsjk+b9cbvrff-b(9#u@-4-r-r$v*$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.get_value('DEBUG', default=False)
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = [
 ]
@@ -136,5 +138,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if env.get_value('DEBUG') == False:
+if not env('DEBUG'):
+    print('Deploying to Heroku')
     django_heroku.settings(locals())
