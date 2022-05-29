@@ -14,7 +14,6 @@ openweather_api_key = env("OPEN_WEATHER_API_KEY")
 def index(request):
     request.session['id'] = str(uuid.uuid4())
     # TODO: Log when a new user session is created
-    print(f'New user just visited the website {request.session["id"]}')
     return render(request, 'index.html', {})
 
 
@@ -22,7 +21,6 @@ def search(request):
     """
     Page showing the results of the location search
     """
-    print(f'User {request.session["id"]} just searched')
 
     if request.method != 'POST':
         # TODO: Log when invalid access it made
@@ -34,30 +32,30 @@ def search(request):
 
     # TODO: Log the locations found from the API request
     # TODO: Enable logging with requests library
-    geocoding_api_base = 'http://api.openweathermap.org/geo/1.0/direct'
-    matching_locations = requests.get(
-        geocoding_api_base,
+    api = 'http://api.openweathermap.org/geo/1.0/direct'
+    response = requests.get(
+        api,
         params={
             'q': location,
             'appid': openweather_api_key,
             'limit': 5
         })
 
-    if not matching_locations.ok or len(matching_locations.json()) == 0:
+    if not response.ok or len(response.json()) == 0:
         # TODO: Log when the returned values are invalid
         return render(request, 'search.html', {'success': False, 'search': location, 'results': f'Unable to find {location}'})
 
-    location_data = [{
+    locations = [{
         'name': location['name'],
         'lat': location['lat'],
         'lon': location['lon'],
         'country': pycountry.countries.get(alpha_2=location['country']).name,
         'state': location['state'] if 'state' in location else '',
-    } for location in matching_locations.json()]
+    } for location in response.json()]
 
     # TODO: Demonstrate negative example of logging an API key by logging your OpenWeather API key
 
-    return render(request, 'search.html', {'success': True, 'search': location, 'results': location_data})
+    return render(request, 'search.html', {'success': True, 'search': location, 'results': locations})
 
 
 def weather(request):
@@ -74,9 +72,9 @@ def weather(request):
     input = request.POST['location'].split(', ')
 
     # TODO: Log the API request made
-    weather_api_base = 'https://api.openweathermap.org/data/2.5/weather'
-    api_response = requests.get(
-        weather_api_base,
+    api = 'https://api.openweathermap.org/data/2.5/weather'
+    response = requests.get(
+        api,
         params={
             'lat': float(input[1]),
             'lon': float(input[2]),
@@ -84,15 +82,13 @@ def weather(request):
             'units': 'metric'
         })
 
-    print(api_response.json())
-
-    if not api_response.ok:
+    if not response.ok:
         return render(request, 'weather.html', {'success': False, 'weather': f'Invalid location selected...'})
 
     weather = {
-        'current': api_response.json()['weather'][0]['description'].lower(),
-        'temp': api_response.json()['main']['temp'],
-        'feels_like': api_response.json()['main']['feels_like'],
+        'current': response.json()['weather'][0]['description'].lower(),
+        'temp': response.json()['main']['temp'],
+        'feels_like': response.json()['main']['feels_like'],
         'location': input[0]
     }
     return render(request, 'weather.html', {'success': True, 'weather': weather})
