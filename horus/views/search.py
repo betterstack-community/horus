@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from openweather import search_countries
+from ..openweather import search_countries
 
 
 def search(request):

@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from openweather import get_current_weather
+from ..openweather import get_current_weather
 
 
 def weather(request):
