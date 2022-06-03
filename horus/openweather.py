@@ -16,12 +16,14 @@ def __request__(api, params):
 
 
 def search_countries(search, limit=5):
+    # TODO: Log the locations found from the API request
     response = __request__(
         'http://api.openweathermap.org/geo/1.0/direct',
         {'q': search, 'limit': limit}
     )
 
     if not response.ok or len(response.json()) == 0:
+        # TODO: Log when the returned values are invalid
         return (False, [])
 
     locations = [{
