@@ -2,6 +2,8 @@ import environ
 import pycountry
 import requests
 
+# TODO: Enable logging with requests library
+
 env = environ.Env()
 env.read_env(env.str('ENV_PATH', '.env'))
 key = env('OPEN_WEATHER_API_KEY')
