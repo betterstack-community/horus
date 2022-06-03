@@ -1,6 +1,6 @@
 import environ
-import requests
 import pycountry
+import requests
 
 env = environ.Env()
 env.read_env(env.str('ENV_PATH', '.env'))
@@ -31,3 +31,22 @@ def search_countries(search, limit=5):
     } for location in response.json()]
 
     return (True, locations)
+
+
+def get_current_weather(location, lat, lon):
+    response = __request__(
+        'https://api.openweathermap.org/data/2.5/weather',
+        {'lat': lat, 'lon': lon, 'units': 'metric'}
+    )
+
+    if not response.ok:
+        return (False, {})
+
+    weather = {
+        'current': response.json()['weather'][0]['description'].lower(),
+        'temp': response.json()['main']['temp'],
+        'feels_like': response.json()['main']['feels_like'],
+        'location': location
+    }
+
+    return (True, weather)
