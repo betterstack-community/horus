@@ -16,7 +16,7 @@ session is created.
 # Create a new Logger with name 'horus.views.index', this Logger will be used for the entire view
 logger = logging.getLogger('horus.views.index')
 
-# Set Logger level to include all INFO messages
+# Set Logger level to include all INFO and above messages
 logger.setLevel(logging.INFO)
 
 # Create a StreamHandler to output all logs to the console
