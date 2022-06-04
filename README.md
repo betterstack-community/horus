@@ -29,4 +29,10 @@ python manage.py runserver
 
 ## Following along
 
-Start your logging journey in `horus/views/index.py` and build from there, following the TODOs in each file.
+Start your logging journey in `horus/views/index.py` and understand the general steps necessary for setting up a logging system independent of Django using `logging`.
+
+Then, move on to `horus/openweather.py` to use your newly acquired skills to add logging to this file, following the prompts provided.
+
+Once you've gotten comfortable with basic logging skills and conventions, hop over to `horus/views/search.py` for a guided procedure of setting up logging specific to Django.
+
+With that, you can implement your own Django-specific logging in `horus/views/weather.py`.
