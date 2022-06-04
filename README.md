@@ -26,3 +26,7 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 ```
+
+## Following along
+
+Start your logging journey in `horus/views/index.py` and build from there, following the TODOs in each file.
