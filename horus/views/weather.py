@@ -1,12 +1,18 @@
 from django.shortcuts import redirect, render
+
 from ..openweather import get_current_weather
+
+"""
+Practice using Django-specific logging here!
+
+Like in settings.py and search.py, we will first setup the basic logging details in settings.py before retrieving the
+configured logger here.
+"""
+
+# TODO: Get logger 'horus.views.weather' setup in settings.py
 
 
 def weather(request):
-    """
-    Page showing the weather information from the selected location
-    """
-
     if request.method != 'POST':
         # TODO: Log when invalid access is made
         return redirect('/')
@@ -20,7 +26,6 @@ def weather(request):
 
     (success, weather) = get_current_weather(
         input[0], float(input[1]), float(input[2]))
-    # TODO: Log response from API
 
     if not success:
         # TODO: Log when request failed

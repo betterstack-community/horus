@@ -145,6 +145,7 @@ if not env('DEBUG'):
 
 
 # Logging configurations
+# Once you have understood how the logging configurations and search.py is implemented, work on the TODOs
 LOGGING = {
     'version': 1,
     # Leave any existing loggers (from index.py and openweather.py) to continue working
@@ -166,7 +167,8 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             # Add formatter to handler
             'formatter': 'base'
-        }
+        },
+        # TODO: Create a FileHandler, 'file', that also uses the 'base' Formatter
     },
 
     # Define custom loggers that you will reference within the project through logging.getLogger
@@ -177,5 +179,6 @@ LOGGING = {
             # Log INFO messages and above
             'level': 'INFO'
         }
+        # TODO: Define a new logger called 'horus.views.weather', it will use both the 'console' and 'file' handler
     }
 }
