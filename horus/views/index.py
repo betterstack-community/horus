@@ -24,7 +24,7 @@ sh = logging.StreamHandler()
 
 # Create a Formatter that will output the following format: '<name> at <timestamp> (<level>) :: <message>'
 formatter = logging.Formatter(
-    '%(name)s  at %(asctime)s (%(levelname)s) :: %(message)s')
+    '%(name)s at %(asctime)s (%(levelname)s) :: %(message)s')
 
 # Set the above Formatter to the StreamHandler so that all logs output to the console will follow the given format
 sh.setFormatter(formatter)
