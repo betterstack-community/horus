@@ -20,12 +20,6 @@ class OpenWeatherError(Exception):
     pass
 
 
-env = environ.Env()
-env.read_env(env.str('ENV_PATH', '.env'))
-
-# TODO: Demonstrate a bad example of logging by logging the API key to the console
-key = env('OPEN_WEATHER_API_KEY')
-
 # TODO: Create a new Logger with name 'horus.openweather'
 
 # TODO: Set the Logger level to include all INFO and above messages
@@ -39,6 +33,12 @@ key = env('OPEN_WEATHER_API_KEY')
 # TODO: Set the above Formatter to both the StreamHandler and FileHandler
 
 # TODO: Add both the StreamHandler and FileHandler to the Logger
+
+env = environ.Env()
+env.read_env(env.str('ENV_PATH', '.env'))
+
+# TODO: Demonstrate a bad example of logging by logging the API key to the console
+key = env('OPEN_WEATHER_API_KEY')
 
 
 def __request__(api, params):
