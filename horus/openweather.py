@@ -95,4 +95,4 @@ def get_current_weather(location, lat, lon):
         'location': location
     }
 
-    return (True, weather)
+    return weather
