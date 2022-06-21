@@ -33,6 +33,8 @@ def search(request):
     (success, locations) = search_countries(location)
 
     if not success:
+        # Log when the request failed
+        logger.warning(f'Failed to find {location} successfully')
         return render(request, 'search.html', {'success': success})
 
     return render(request, 'search.html', {'success': success, 'search': location, 'results': locations})
