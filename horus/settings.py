@@ -169,14 +169,6 @@ LOGGING = {
         }
     },
 
-    # Modify the root logger when using basic logging.warning to have a level of INFO and above and output to the console
-    'root': {
-        # Set handlers to console defined above
-        'handlers': ['console'],
-        # Log INFO messages and above
-        'level': 'INFO'
-    },
-
     # Define custom loggers that you will reference within the project through logging.getLogger
     'loggers': {
         'horus.views.search': {
