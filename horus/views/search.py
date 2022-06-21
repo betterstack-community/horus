@@ -1,27 +1,38 @@
+import logging
 from django.shortcuts import redirect, render
+
 from ..openweather import search_countries
+
+"""
+Using Django-specific logging configurations
+
+To configure Django-specific logging, modify settings.py with the respective loggers
+"""
+
+# Get the logger setup in settings.py
+logger = logging.getLogger('horus.views.search')
 
 
 def search(request):
-    """
-    Page showing the results of the location search
-    """
+    # Start logging!
 
     if request.method != 'POST':
-        # TODO: Log when invalid access is made
+        # Log when invalid access is made
+        logger.warning(
+            'Invalid access made to /search, page should be accessed through / first')
         return redirect('/')
 
-    # TODO: Log when user navigates to search page successfully
+    # Log the current user when they successfully navigate to this /search page
+    logger.info(f'User {request.session["id"]} has navigated to /search')
 
     location = request.POST['location']
 
-    # TODO: Add logging for the location searched
+    # Log the location searched
+    logger.info(f'User {request.session["id"]} searched for {location}')
 
     (success, locations) = search_countries(location)
 
     if not success:
         return render(request, 'search.html', {'success': success})
-
-    # TODO: Demonstrate negative example of logging an API key by logging your OpenWeather API key
 
     return render(request, 'search.html', {'success': success, 'search': location, 'results': locations})
