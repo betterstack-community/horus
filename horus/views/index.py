@@ -19,12 +19,12 @@ logger = logging.getLogger('horus.views.index')
 # Set Logger level to include all INFO and above messages
 logger.setLevel(logging.INFO)
 
-# Create a StreamHandler to output all logs to the console
-sh = logging.StreamHandler()
-
 # Create a Formatter that will output the following format: '<name> at <timestamp> (<level>) :: <message>'
 formatter = logging.Formatter(
     '%(name)s at %(asctime)s (%(levelname)s) :: %(message)s')
+
+# Create a StreamHandler to output all logs to the console
+sh = logging.StreamHandler()
 
 # Set the above Formatter to the StreamHandler so that all logs output to the console will follow the given format
 sh.setFormatter(formatter)

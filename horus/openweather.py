@@ -30,11 +30,11 @@ key = env('OPEN_WEATHER_API_KEY')
 
 # TODO: Set the Logger level to include all INFO and above messages
 
+# TODO: Create a Formatter that will output the following format: '<name> at <timestamp> (level) :: <message>'
+
 # TODO: Create a StreamHandler to output all logs to the console
 
 # TODO: Create a FileHandler to save all WARNING and above logs to a file (hint: set the log level of the FileHandler)
-
-# TODO: Create a Formatter that will output the following format: '<name> at <timestamp> (level) :: <message>'
 
 # TODO: Set the above Formatter to both the StreamHandler and FileHandler
 
