@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 
-from ..openweather import get_current_weather
+from ..openweather import OpenWeatherError, get_current_weather
 
 """
 Practice using Django-specific logging here!
@@ -24,11 +24,10 @@ def weather(request):
     # TODO: Log the latitude and longitude
     input = request.POST['location'].split(', ')
 
-    (success, weather) = get_current_weather(
-        input[0], float(input[1]), float(input[2]))
-
-    if not success:
+    try:
+        weather = get_current_weather(
+            input[0], float(input[1]), float(input[2]))
+        return render(request, 'weather.html', {'success': True, 'weather': weather})
+    except OpenWeatherError:
         # TODO: Log when request failed
-        return render(request, 'weather.html', {'success': success})
-
-    return render(request, 'weather.html', {'success': success, 'weather': weather})
+        return render(request, 'weather.html', {'success': False})

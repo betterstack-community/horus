@@ -1,7 +1,8 @@
 import logging
+
 from django.shortcuts import redirect, render
 
-from ..openweather import search_countries
+from ..openweather import OpenWeatherError, search_countries
 
 """
 Using Django-specific logging configurations
@@ -30,11 +31,10 @@ def search(request):
     # Log the location searched
     logger.info(f'User {request.session["id"]} searched for {location}')
 
-    (success, locations) = search_countries(location)
-
-    if not success:
-        # Log when the request failed
-        logger.warning(f'Failed to find {location} successfully')
-        return render(request, 'search.html', {'success': success})
-
-    return render(request, 'search.html', {'success': success, 'search': location, 'results': locations})
+    try:
+        locations = search_countries(location)
+        return render(request, 'search.html', {'success': True, 'search': location, 'results': locations})
+    except OpenWeatherError:
+        logger.error(
+            'Unable to retrieve matching locations for search', exc_info=True)
+        return render(request, 'search.html', {'success': False})

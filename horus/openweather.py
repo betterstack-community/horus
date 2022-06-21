@@ -14,6 +14,12 @@ To improve the usefulness of the log messages, follow these three simple steps:
 3. Include as much information about the log, instead of just printing results
 """
 
+
+class OpenWeatherError(Exception):
+    """Raised when an error occurs with calling the OpenWeather API"""
+    pass
+
+
 env = environ.Env()
 env.read_env(env.str('ENV_PATH', '.env'))
 
@@ -52,7 +58,8 @@ def search_countries(search, limit=5):
 
     if not response.ok or len(response.json()) == 0:
         # TODO: Log when the returned values are invalid
-        return (False, [])
+        raise OpenWeatherError(
+            'OpenWeather could not find matching locations - response not OK or response is empty')
 
     # TODO: Log the parsed locations
     locations = [{
@@ -63,7 +70,7 @@ def search_countries(search, limit=5):
         'state': location['state'] if 'state' in location else ''
     } for location in response.json()]
 
-    return (True, locations)
+    return locations
 
 
 def get_current_weather(location, lat, lon):
@@ -77,7 +84,8 @@ def get_current_weather(location, lat, lon):
 
     if not response.ok:
         # TODO: Log when the API request fails
-        return (False, {})
+        raise OpenWeatherError(
+            'OpenWeather could not find the weather of the location - response not OK')
 
     # TODO: Log the parsed weather
     weather = {
