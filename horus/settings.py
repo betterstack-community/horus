@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import os
+from ensurepip import version
 from pathlib import Path
 
 import django_heroku
@@ -141,3 +142,48 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 if not env('DEBUG'):
     print('Deploying to Heroku')
     django_heroku.settings(locals())
+
+
+# Logging configurations
+LOGGING = {
+    'version': 1,
+    # Leave any existing loggers (from index.py and openweather.py) to continue working
+    'disable_existing_loggers': False,
+
+    # Setup a formatter for handlers
+    'formatters': {
+        'base': {
+            'format': '{name} at {asctime} ({levelname}) :: {message}',
+            'style': '{'
+        }
+    },
+
+    # All handlers go here
+    'handlers': {
+        # Create a basic console handler
+        'console': {
+            # Define class of handler
+            'class': 'logging.StreamHandler',
+            # Add formatter to handler
+            'formatter': 'base'
+        }
+    },
+
+    # Modify the root logger when using basic logging.warning to have a level of INFO and above and output to the console
+    'root': {
+        # Set handlers to console defined above
+        'handlers': ['console'],
+        # Log INFO messages and above
+        'level': 'INFO'
+    },
+
+    # Define custom loggers that you will reference within the project through logging.getLogger
+    'loggers': {
+        'horus.views.search': {
+            # Set handlers to console defined above
+            'handlers': ['console'],
+            # Log INFO messages and above
+            'level': 'INFO'
+        }
+    }
+}
