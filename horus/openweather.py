@@ -14,6 +14,9 @@ To improve the usefulness of the log messages, follow these three simple steps:
 3. Include as much information about the log, instead of just printing results
 """
 
+env = environ.Env()
+env.read_env(env.str('ENV_PATH', '.env'))
+
 
 class OpenWeatherError(Exception):
     """Raised when an error occurs with calling the OpenWeather API"""
@@ -33,9 +36,6 @@ class OpenWeatherError(Exception):
 # TODO: Set the above Formatter to both the StreamHandler and FileHandler
 
 # TODO: Add both the StreamHandler and FileHandler to the Logger
-
-env = environ.Env()
-env.read_env(env.str('ENV_PATH', '.env'))
 
 # TODO: Demonstrate a bad example of logging by logging the API key to the console
 key = env('OPEN_WEATHER_API_KEY')
