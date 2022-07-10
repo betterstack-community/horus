@@ -14,7 +14,6 @@ import os
 from ensurepip import version
 from pathlib import Path
 
-import django_heroku
 import environ
 
 env = environ.Env(
@@ -138,10 +137,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-if not env('DEBUG'):
-    print('Deploying to Heroku')
-    django_heroku.settings(locals())
 
 
 # Logging configurations
