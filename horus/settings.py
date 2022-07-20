@@ -17,7 +17,7 @@ from pathlib import Path
 import environ
 
 env = environ.Env(
-    DEBUG=(bool, False)
+    DEBUG=(bool, True)
 )
 env.read_env(env.str('ENV_PATH', '.env'))
 
