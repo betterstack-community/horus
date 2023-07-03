@@ -1,38 +1,57 @@
 # Horus
 
-Weather app built on Django
+A simple weather app built with Django. This application serves to demonstrate
+the fundamentals of logging in Python within the context of a Django
+application.
 
-## Introduction
+**See the full tutorial**:
+[How to Get Started with Logging in Django](https://betterstack.com/community/guides/logging/how-to-start-logging-with-django/).
 
-This application aims to demonstrate the fundamentals of logging in Python within the context of a Django application. Thus, the application aims to be as minimal and simplistic as possible to avoid needing to over-explain how Django works which is not the focus.
+## 🟢 Prerequisites
 
-## Features
+- [Python 3.10](https://docs.python.org/3/using/index.html) or later.
+- [SQLite](https://www.servermania.com/kb/articles/install-sqlite/).
 
-- Search location by name
-- Get current location weather
-- Unique user session tracking
+## 📦 Getting started
 
-## Setup
+- Clone the GitHub repository and `cd` into it:
 
-```python
-git clone https://github.com/woojiahao/horus.git
-cd horus/
+```bash
+git clone https://github.com/woojiahao/horus.git && cd horus
 ```
 
-## Local deployment
+- Install all application dependencies:
 
-```python
+```bash
 pip install -r requirements.txt
+```
+
+- Run the database migrations
+
+```bash
 python manage.py migrate
+```
+
+- Sign up for a [free OpenWeatherMap account](https://openweathermap.org/) and
+  retrieve your API key.
+
+- Create a `.env` file at the root of your project with the following contents:
+
+```text
+OPEN_WEATHER_API_KEY=<api key>
+```
+
+- Start the development server at localhost:8000:
+
+```bash
 python manage.py runserver
 ```
 
-## Following along
+- View the application in your browser, and
+  [follow the tutorial](https://betterstack.com/community/guides/logging/how-to-start-logging-with-django/)
+  to learn more.
 
-Start your logging journey in `horus/views/index.py` and understand the general steps necessary for setting up a logging system independent of Django using `logging`.
+## ⚖ License
 
-Then, move on to `horus/openweather.py` to use your newly acquired skills to add logging to this file, following the prompts provided.
-
-Once you've gotten comfortable with basic logging skills and conventions, hop over to `horus/views/search.py` for a guided procedure of setting up logging specific to Django.
-
-With that, you can implement your own Django-specific logging in `horus/views/weather.py`.
+The code used in this project and in the linked tutorial are licensed under the
+[Apache License, Version 2.0](LICENSE).
